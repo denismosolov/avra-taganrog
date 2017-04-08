@@ -18,7 +18,7 @@ public class VideoController : MonoBehaviour {
 	void VideoCont_loopPointReached (VideoPlayer source)
 	{
 		Debug.Log("video ended 1");
-		Debug.Log (m_SpeechToTextComparisonWidget);
+		m_SpeechToTextComparisonWidget.OnRecordButtonClicked();
 	}
 	
 	// Update is called once per frame
