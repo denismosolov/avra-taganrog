@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/scene1.unity
-    guid: e398e251eb83c4c1f9c33951d6bf407d
   - enabled: 1
-    path: Assets/video-scene.unity
-    guid: e2c9cc95bb3ce4b2fbe8c469c8127ff7
+    path: Assets/SpeechToText/Scenes/speechToTextComparison.unity
+    guid: 6558f544178146c4d9efe0563f988ddc

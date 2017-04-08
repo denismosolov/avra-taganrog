@@ -2206,14 +2206,14 @@ VideoPlayer:
   m_TargetMaterialProperty: _MainTex
   m_RenderMode: 3
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_PlaybackSpeed: 1
-  m_AudioOutputMode: 1
+  m_AudioOutputMode: 0
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: 
+  m_Url: /Assets/StreamingAssets/drinks.mp4
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
@@ -7695,7 +7695,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1544414181}
-  - component: {fileID: 1544414182}
   m_Layer: 5
   m_Name: SpeechToTextComparisonWidget
   m_TagString: Untagged
@@ -7725,25 +7724,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1544414182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1544414180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b680754357de068418689921c1b873d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RecordingText: Stop Recording
-  m_NotRecordingText: Start Recording
-  m_RecordingButtonColor: {r: 0.99264705, g: 0.31385165, b: 0.48892576, a: 1}
-  m_NotRecordingButtonColor: {r: 1, g: 1, b: 1, a: 1}
-  m_WaitingForResponsesText: Waiting for Responses
-  m_ResponsesTimeoutInSeconds: 10
-  m_SpeechToTextServiceWidgets:
-  - {fileID: 575130139}
 --- !u!1 &1618842524
 GameObject:
   m_ObjectHideFlags: 0

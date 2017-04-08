@@ -61,6 +61,8 @@ namespace UnitySpeechToText.Widgets
 
 		VideoPlayer m_VideoPlayer;
 
+		bool isSilenceVideo;
+
         /// <summary>
         /// Text to display on the record button when recording
         /// </summary>
@@ -109,14 +111,23 @@ namespace UnitySpeechToText.Widgets
 
 			m_VideoPlayer = GetComponent<VideoPlayer> ();
 			m_VideoPlayer.loopPointReached += VideoCont_loopPointReached;
+			m_VideoPlayer.url = "file://" + Application.streamingAssetsPath + "/drinks.mp4";
 			//Debug.Log(m_VideoPlayer);
         }
 
 		void VideoCont_loopPointReached (VideoPlayer source)
 		{
-			Debug.Log("StartRecording");
-			StartRecording();
+			if (!isSilenceVideo) {
+				Debug.Log("StartRecording");
+				StartRecording();
 
+				m_VideoPlayer.url = "file://" + Application.streamingAssetsPath + "/silence.mp4";
+				isSilenceVideo = true;
+			} else {
+				// already silence
+				Debug.Log("Silence video replay");
+				m_VideoPlayer.Play ();
+			}
 		}
 
         /// <summary>
