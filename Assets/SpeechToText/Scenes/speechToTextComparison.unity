@@ -2180,10 +2180,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 392859261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f54f994a02de4934a8ff2d4595aa2f0, type: 3}
+  m_Script: {fileID: 11500000, guid: b680754357de068418689921c1b873d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SpeechToTextComparisonWidget: {fileID: 1544414182}
+  m_RecordingText: 
+  m_NotRecordingText: 
+  m_RecordingButtonColor: {r: 1, g: 0, b: 0, a: 1}
+  m_NotRecordingButtonColor: {r: 1, g: 1, b: 1, a: 1}
+  m_WaitingForResponsesText: 
+  m_ResponsesTimeoutInSeconds: 8
+  m_SpeechToTextServiceWidgets:
+  - {fileID: 575130139}
 --- !u!328 &392859263
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -2191,7 +2198,7 @@ VideoPlayer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 392859261}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 5c84ef7affc304e788144324e5c037dd, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 66d6368a631eb4a5e9ceee99830e6f7d, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera: {fileID: 0}
   m_TargetTexture: {fileID: 0}
@@ -7729,7 +7736,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b680754357de068418689921c1b873d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PhrasesToggleGroup: {fileID: 356533957}
   m_RecordingText: Stop Recording
   m_NotRecordingText: Start Recording
   m_RecordingButtonColor: {r: 0.99264705, g: 0.31385165, b: 0.48892576, a: 1}

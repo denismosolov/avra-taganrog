@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnitySpeechToText.Utilities;
+using UnityEngine.Video;
 
 namespace UnitySpeechToText.Widgets
 {
@@ -10,11 +11,6 @@ namespace UnitySpeechToText.Widgets
     /// </summary>
     public class SpeechToTextComparisonWidget : MonoBehaviour
     {
-        /// <summary>
-        /// Store for PhrasesToggleGroup property
-        /// </summary>
-        [SerializeField]
-        ToggleGroup m_PhrasesToggleGroup;
         /// <summary>
         /// Store for RecordingText property
         /// </summary>
@@ -63,10 +59,8 @@ namespace UnitySpeechToText.Widgets
         /// </summary>
         HashSet<SpeechToTextServiceWidget> m_WaitingSpeechToTextServiceWidgets = new HashSet<SpeechToTextServiceWidget>();
 
-        /// <summary>
-        /// Toggle group for sample phrases
-        /// </summary>
-        public ToggleGroup PhrasesToggleGroup { set { m_PhrasesToggleGroup = value; } }
+		VideoPlayer m_VideoPlayer;
+
         /// <summary>
         /// Text to display on the record button when recording
         /// </summary>
@@ -111,7 +105,19 @@ namespace UnitySpeechToText.Widgets
         void Start()
         {
             RegisterSpeechToTextServiceWidgetsCallbacks();
+			Debug.Log("Comparsion Start");
+
+			m_VideoPlayer = GetComponent<VideoPlayer> ();
+			m_VideoPlayer.loopPointReached += VideoCont_loopPointReached;
+			//Debug.Log(m_VideoPlayer);
         }
+
+		void VideoCont_loopPointReached (VideoPlayer source)
+		{
+			Debug.Log("StartRecording");
+			StartRecording();
+
+		}
 
         /// <summary>
         /// Function that is called when the MonoBehaviour will be destroyed.
@@ -226,17 +232,10 @@ namespace UnitySpeechToText.Widgets
                 m_IsRecording = false;
 
                 // Disable all UI interaction until all responses have been received or after the specified timeout.
-                DisableAllUIInteraction();
                 Invoke("FinishComparisonSession", m_ResponsesTimeoutInSeconds);
 
                 // If a phrase is selected, pass it to the SpeechToTextServiceWidget.
                 string comparisonPhrase = null;
-                if (m_PhrasesToggleGroup.AnyTogglesOn())
-                {
-                    IEnumerator<Toggle> toggleEnum = m_PhrasesToggleGroup.ActiveToggles().GetEnumerator();
-                    toggleEnum.MoveNext();
-                    comparisonPhrase = toggleEnum.Current.gameObject.GetComponentInChildren<Text>().text;
-                }
 
                 foreach (var serviceWidget in m_SpeechToTextServiceWidgets)
                 {
@@ -256,29 +255,6 @@ namespace UnitySpeechToText.Widgets
             if (m_IsCurrentlyInSpeechToTextSession)
             {
                 m_IsCurrentlyInSpeechToTextSession = false;
-                EnableAllUIInteraction();
-            }
-        }
-
-        /// <summary>
-        /// Enables interaction with the record button and phrase toggles.
-        /// </summary>
-        void EnableAllUIInteraction()
-        {
-            foreach (var toggle in m_PhrasesToggleGroup.GetComponentsInChildren<Toggle>(true))
-            {
-                toggle.interactable = true;
-            }
-        }
-
-        /// <summary>
-        /// Disables interaction with the record button and phrase toggles.
-        /// </summary>
-        void DisableAllUIInteraction()
-        {
-            foreach (var toggle in m_PhrasesToggleGroup.GetComponentsInChildren<Toggle>())
-            {
-                toggle.interactable = false;
             }
         }
     }
