@@ -8430,7 +8430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RecordingFrequency: 44100
-  m_MaxRecordingLengthInSeconds: 15
+  m_MaxRecordingLengthInSeconds: 3
 --- !u!4 &1699089669
 Transform:
   m_ObjectHideFlags: 0
