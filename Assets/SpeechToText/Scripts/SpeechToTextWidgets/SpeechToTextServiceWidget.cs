@@ -328,7 +328,7 @@ namespace UnitySpeechToText.Widgets
         /// <param name="result">The speech-to-text result</param>
         void OnTextResult(SpeechToTextResult result)
         {
-			Debug.Log (result);
+			Debug.Log (result.TextAlternatives[0].Text);
             if (m_WillDisplayReceivedResults)
             {
                 // For the purposes of comparing results, this just uses the first alternative
