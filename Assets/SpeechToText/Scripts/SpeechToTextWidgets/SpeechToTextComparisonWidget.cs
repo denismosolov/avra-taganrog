@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnitySpeechToText.Utilities;
 using UnityEngine.Video;
+using System.Text.RegularExpressions;
+//using UnityEditor;
 
 namespace UnitySpeechToText.Widgets
 {
@@ -61,7 +64,10 @@ namespace UnitySpeechToText.Widgets
 
 		VideoPlayer m_VideoPlayer;
 
-		bool isSilenceVideo;
+		public VideoClip videoSilent;
+		public VideoClip videoDrinks;
+		public VideoClip videoGotit;
+		public VideoClip videoSorry;
 
         /// <summary>
         /// Text to display on the record button when recording
@@ -111,22 +117,23 @@ namespace UnitySpeechToText.Widgets
 
 			m_VideoPlayer = GetComponent<VideoPlayer> ();
 			m_VideoPlayer.loopPointReached += VideoCont_loopPointReached;
-			m_VideoPlayer.url = "file://" + Application.streamingAssetsPath + "/drinks.mp4";
-			//Debug.Log(m_VideoPlayer);
+
+			PlayVideo (videoDrinks);
         }
 
+		bool LessonStart = true;
+		bool LessonComplete = false;
 		void VideoCont_loopPointReached (VideoPlayer source)
 		{
-			if (!isSilenceVideo) {
-				Debug.Log("StartRecording");
-				StartRecording();
+			if (LessonStart) {
+				LessonStart = false;
 
-				m_VideoPlayer.url = "file://" + Application.streamingAssetsPath + "/silence.mp4";
-				isSilenceVideo = true;
-			} else {
-				// already silence
-				Debug.Log("Silence video replay");
-				m_VideoPlayer.Play ();
+				Debug.Log ("StartRecording");
+				StartRecording ();
+
+				PlayVideo (videoSilent);
+			} else if (!LessonComplete) {
+				PlayVideo (videoSilent);
 			}
 		}
 
@@ -203,6 +210,17 @@ namespace UnitySpeechToText.Widgets
         /// <param name="serviceWidget">The speech-to-text service widget that received a last response</param>
         void OnSpeechToTextReceivedLastResponse(SpeechToTextServiceWidget serviceWidget)
         {
+			var text = serviceWidget.getResult ();
+			Debug.Log (text);
+			Regex rgx = new Regex(@"\bчай\b.*\bлимон.*", RegexOptions.IgnoreCase);
+			if (!String.IsNullOrEmpty(text) && rgx.IsMatch(text)) {
+				PlayVideo(videoGotit);
+			} else {
+				PlayVideo(videoSorry);
+			}
+
+			LessonComplete = true;
+
             SmartLogger.Log(DebugFlags.SpeechToTextWidgets, "Response from " + serviceWidget.SpeechToTextServiceString());
             m_WaitingSpeechToTextServiceWidgets.Remove(serviceWidget);
             if (m_WaitingSpeechToTextServiceWidgets.Count == 0)
@@ -211,6 +229,13 @@ namespace UnitySpeechToText.Widgets
                 FinishComparisonSession();
             }
         }
+
+		void PlayVideo(VideoClip video)
+		{
+			m_VideoPlayer.clip = video;
+				//LoadAssetAtPath<UnityEngine.Video.VideoClip>("Assets/" + video);
+			m_VideoPlayer.Play();
+		}
 
         /// <summary>
         /// Starts recording audio for each speech-to-text service widget if not already recording.
@@ -241,6 +266,8 @@ namespace UnitySpeechToText.Widgets
             if (m_IsRecording)
             {
                 m_IsRecording = false;
+
+				Debug.Log ("finish rec");
 
                 // Disable all UI interaction until all responses have been received or after the specified timeout.
                 Invoke("FinishComparisonSession", m_ResponsesTimeoutInSeconds);

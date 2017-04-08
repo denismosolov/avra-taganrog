@@ -182,7 +182,7 @@ namespace UnitySpeechToText.Widgets
         /// methods is called the first time.
         /// </summary>
         void Start()
-        {
+		{
             RegisterSpeechToTextServiceCallbacks();
             SetResultsScrollRectChildComponents();
         }
@@ -328,8 +328,7 @@ namespace UnitySpeechToText.Widgets
         /// <param name="result">The speech-to-text result</param>
         void OnTextResult(SpeechToTextResult result)
         {
-			Debug.Log (result.TextAlternatives[0].Text);
-            if (m_WillDisplayReceivedResults)
+			if (m_WillDisplayReceivedResults)
             {
                 // For the purposes of comparing results, this just uses the first alternative
                 m_LastResultWasFinal = result.IsFinal;
@@ -352,6 +351,11 @@ namespace UnitySpeechToText.Widgets
                 }
             }
         }
+
+		public string getResult()
+		{
+			return m_ResultsTextUI.text;
+		}
 
         /// <summary>
         /// Does any final processing necessary for the results of the last started session and then
