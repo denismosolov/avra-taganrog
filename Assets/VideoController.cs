@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
+using UnitySpeechToText.Widgets;
 
 public class VideoController : MonoBehaviour {
+
+	public SpeechToTextComparisonWidget m_SpeechToTextComparisonWidget;
 
 	// Use this for initialization
 	void Start () {
@@ -15,6 +18,7 @@ public class VideoController : MonoBehaviour {
 	void VideoCont_loopPointReached (VideoPlayer source)
 	{
 		Debug.Log("video ended 1");
+		Debug.Log (m_SpeechToTextComparisonWidget);
 	}
 	
 	// Update is called once per frame
@@ -22,9 +26,4 @@ public class VideoController : MonoBehaviour {
 		
 	}
 
-	void EndReached(UnityEngine.Video.VideoPlayer vp)
-	{
-		//vp.playbackSpeed = vp.playbackSpeed / 10.0F;
-		Debug.Log("video ended");
-	}
 }

@@ -2183,6 +2183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f54f994a02de4934a8ff2d4595aa2f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SpeechToTextComparisonWidget: {fileID: 1544414182}
 --- !u!328 &392859263
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -6265,8 +6266,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1544414182}
-        m_MethodName: OnRecordButtonClicked
+      - m_Target: {fileID: 1544414180}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
