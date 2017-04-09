@@ -20,7 +20,7 @@ VideoClipImporter:
   encodeAlpha: 0
   sourceHasAlpha: 0
   flipVertical: 0
-  flipHorizontal: 0
+  flipHorizontal: 1
   importAudio: 1
   sourceAudioChannelCount: 0200
   sourceAudioSampleRate: 80bb0000
@@ -52,7 +52,7 @@ VideoClipImporter:
     streamedResource:
       source: library/metadata/10/10c019d53f2294d52a44fdb1d263c722.resource
       offset: 0
-      size: 16041034
+      size: 16231347
   userData: 
   assetBundleName: 
   assetBundleVariant: 
