@@ -290,7 +290,7 @@ namespace UnitySpeechToText.Widgets
         /// Clears the current results text and tells the speech-to-text service to start recording.
         /// </summary>
         public void StartRecording()
-        {
+		{
             SmartLogger.Log(DebugFlags.SpeechToTextWidgets, "Start service widget recording");
             m_WillDisplayReceivedResults = true;
             m_WaitingForLastFinalResultOfSession = false;
@@ -401,7 +401,7 @@ namespace UnitySpeechToText.Widgets
         /// </summary>
         /// <param name="text">The error text</param>
         void OnSpeechToTextError(string text)
-        {
+		{
             SmartLogger.LogError(DebugFlags.SpeechToTextWidgets, SpeechToTextServiceString() + " error: " + text);
             if (m_WillDisplayReceivedResults)
             {
@@ -423,10 +423,10 @@ namespace UnitySpeechToText.Widgets
         /// Function that is called when the recording times out.
         /// </summary>
         void OnSpeechToTextRecordingTimeout()
-        {
+		{
             SmartLogger.Log(DebugFlags.SpeechToTextWidgets, SpeechToTextServiceString() + " call timeout");
             if (m_OnRecordingTimeout != null)
-            {
+			{
                 m_OnRecordingTimeout();
             }
         }

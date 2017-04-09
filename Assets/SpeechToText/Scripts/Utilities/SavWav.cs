@@ -48,7 +48,7 @@ namespace UnitySpeechToText.Utilities
         // if the user chooses not to overwrite a file of the same name if it exists.
         public static string Save(string fileName, AudioClip clip, bool overwiteIfExists = false)
         {
-            var filePath = Path.ChangeExtension(Path.Combine(Path.Combine(Path.Combine(Application.dataPath, Constants.SpeechToTextFolderName), Constants.TempFolderName), fileName), "wav");
+			var filePath = Path.ChangeExtension(Path.Combine(Path.Combine(Path.Combine(Application.persistentDataPath, Constants.SpeechToTextFolderName), Constants.TempFolderName), fileName), "wav");
 
             if (!overwiteIfExists)
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -110,15 +111,20 @@ namespace UnitySpeechToText.Widgets
         /// Initialization function called on the frame when the script is enabled just before any of the Update
         /// methods is called the first time.
         /// </summary>
-        void Start()
-        {
-            RegisterSpeechToTextServiceWidgetsCallbacks();
-			Debug.Log("Comparsion Start");
+		IEnumerator Start()
+		{
+			yield return Application.RequestUserAuthorization(UserAuthorization.Microphone);
+			if (Application.HasUserAuthorization(UserAuthorization.Microphone)) {
+				RegisterSpeechToTextServiceWidgetsCallbacks();
+				Debug.Log("Comparsion Start");
 
-			m_VideoPlayer = GetComponent<VideoPlayer> ();
-			m_VideoPlayer.loopPointReached += VideoCont_loopPointReached;
+				m_VideoPlayer = GetComponent<VideoPlayer> ();
+				m_VideoPlayer.loopPointReached += VideoCont_loopPointReached;
 
-			PlayVideo (videoDrinks);
+				PlayVideo (videoDrinks);
+			} else {
+				Application.Quit ();
+			}
         }
 
 		bool LessonStart = true;
@@ -242,7 +248,7 @@ namespace UnitySpeechToText.Widgets
         void StartRecording()
         {
             if (!m_IsRecording)
-            {
+			{
                 SmartLogger.Log(DebugFlags.SpeechToTextWidgets, "Start comparison recording");
                 m_IsCurrentlyInSpeechToTextSession = true;
                 m_IsRecording = true;
@@ -265,7 +271,6 @@ namespace UnitySpeechToText.Widgets
             if (m_IsRecording)
             {
                 m_IsRecording = false;
-
 				Debug.Log ("finish rec");
 
                 // Disable all UI interaction until all responses have been received or after the specified timeout.
