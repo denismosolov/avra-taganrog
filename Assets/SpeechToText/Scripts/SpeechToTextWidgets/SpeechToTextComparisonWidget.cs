@@ -131,9 +131,9 @@ namespace UnitySpeechToText.Widgets
 				Debug.Log ("StartRecording");
 				StartRecording ();
 
-				PlayVideo (videoSilent);
+				//PlayVideo (videoSilent);
 			} else if (!LessonComplete) {
-				PlayVideo (videoSilent);
+				//PlayVideo (videoSilent);
 			}
 		}
 
@@ -233,7 +233,6 @@ namespace UnitySpeechToText.Widgets
 		void PlayVideo(VideoClip video)
 		{
 			m_VideoPlayer.clip = video;
-				//LoadAssetAtPath<UnityEngine.Video.VideoClip>("Assets/" + video);
 			m_VideoPlayer.Play();
 		}
 
